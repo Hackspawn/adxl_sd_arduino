@@ -1,28 +1,7 @@
-/*  ********************************************* 
- *  SparkFun_ADXL345_Example
- *  Triple Axis Accelerometer Breakout - ADXL345 
- *  Hook Up Guide Example 
- *  
- *  Utilizing Sparkfun's ADXL345 Library
- *  Bildr ADXL345 source file modified to support 
- *  both I2C and SPI Communication
- *  
- *  E.Robert @ SparkFun Electronics
- *  Created: Jul 13, 2016
- *  Updated: Sep 06, 2016
- *  
- *  Development Environment Specifics:
- *  Arduino 1.6.11
- *  
- *  Hardware Specifications:
- *  SparkFun ADXL345
- *  Arduino Uno
- *  *********************************************/
-
 #include <SparkFun_ADXL345.h>         // SparkFun ADXL345 Library
 #include <SD.h> //esta biblioteca escribe en la micro SD
 
-File logFile;
+File logFile; //define el nombre de la variable archivo
 
 
 /*********** COMMUNICATION SELECTION ***********/
@@ -40,7 +19,7 @@ ADXL345 adxl = ADXL345();             // USE FOR I2C COMMUNICATION
 void setup(){
   
   Serial.begin(9600);                 // Start the serial terminal
-  Serial.print(F("Iniciando SD ..."));
+  Serial.print(F("Iniciando SD ...")); //inicia la tarjeta MicroSD
 
   if (!SD.begin(9)) {
     Serial.println(F("Error al iniciar"));
@@ -48,9 +27,7 @@ void setup(){
   }
   Serial.println(F("Iniciado correctamente"));
   
-  logFile = SD.open("datalog.txt", FILE_WRITE);
-  
-  Serial.println("SparkFun ADXL345 Accelerometer Hook Up Guide Example");
+  Serial.println("SparkFun ADXL345");
   Serial.println();
   
   adxl.powerOn();                     // Power on the ADXL345
@@ -103,7 +80,7 @@ void setup(){
 /*     Accelerometer Readings and Interrupt    */
 void loop(){
   
-  logFile = SD.open("datalog.txt", FILE_WRITE);
+  logFile = SD.open("datalog.txt", FILE_WRITE); //abre y escribe en el archivo TXT dentro de la MicroSD
   // Accelerometer Readings
   int x,y,z;   
   adxl.readAccel(&x, &y, &z);         // Read the accelerometer values and store them in variables declared above x,y,z
